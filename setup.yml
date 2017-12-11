@@ -1,6 +1,9 @@
 ---
 - hosts: all
   become: yes  # This means that all tasks will be executed with sudo
+  vars:
+    venv_path: /home/vagrant/venv
+    requirements_path: /vagrant/requirements.txt
   tasks:
     - name: Add key for jonathonf PPA
       apt_key:
@@ -33,6 +36,6 @@
     - name: Create virtualenv
       become: no
       pip:
-        virtualenv: "/home/vagrant/venv"
+        virtualenv: "{{ venv_path }}"
         virtualenv_python: python3.6
-        requirements: "/vagrant/requirements.txt"
+        requirements: "{{ requirements_path }}"
