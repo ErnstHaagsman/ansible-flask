@@ -18,3 +18,21 @@
         name: python3.6
         state: present
         update_cache: yes
+
+    - name: Install pip3
+      apt:
+        name: python3-pip
+        state: present
+        update_cache: yes
+
+    - name: Install 'virtualenv' package
+      pip:
+        name: virtualenv
+        executable: pip3
+
+    - name: Create virtualenv
+      become: no
+      pip:
+        virtualenv: "/home/vagrant/venv"
+        virtualenv_python: python3.6
+        requirements: "/vagrant/requirements.txt"
